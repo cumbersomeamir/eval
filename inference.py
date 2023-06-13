@@ -6,7 +6,9 @@ import bitsandbytes as bnb
 import torch
 from peft import PeftModel, PeftConfig
 from transformers import AutoModelForCausalLM, AutoTokenizer
+import openai
 
+openai.api.key = ""
 all_outputs = []
 
 os.environ["CUDA_VISIBLE_DEVICES"]="0"
@@ -29,4 +31,15 @@ def get_outputs(list1):
 
     final_output = tokenizer.decode(output_tokens[0], skip_special_tokens=True))
     all_outputs.append(final_output)
+    
+    
+def generate_questions_list():
+  content = "Generate random questions which can be used to evaluate the performance of a Large Language model. Please number them"
+  response = openai.ChatCompletion.create(model = "gpt-3.5-turbo", messages = [{"role": "user", "content": content}])
+  
+  message = response['choices'][0]['message']['content']
+  
+  return message
+
+
     
