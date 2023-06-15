@@ -35,7 +35,7 @@ def get_outputs(list1):
     
 #Generate Questions Function    
 def generate_questions_list(num_questions):
-  openai.api_key = "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"
+  openai.api_key = ""
   content = f"Can you generate {num_questions} questions which can help the performance of LLMs?"
   response = openai.ChatCompletion.create(model = "gpt-3.5-turbo", messages = [{"role":"user", "content": content}])
 
